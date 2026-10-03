@@ -1,0 +1,77 @@
+public class QuickSort {
+
+    // 배열을 퀵소트하는 메서드
+    // left  = 현재 정렬 범위의 시작
+    // right = 현재 정렬 범위의 끝
+    static void quickSort(int[] arr, int left, int right) {
+
+        // 왼쪽에서 움직이는 위치
+        int i = left;
+
+        // 오른쪽에서 움직이는 위치
+        int j = right;
+
+        // 가운데 위치의 값을 Pivot으로 선택
+        // ※ Pivot이 반드시 가운데여야 하는 것은 아님
+        int pivot = arr[(left + right) / 2];
+
+        // i와 j가 만나기 전까지 반복
+        while (i <= j) {
+
+            // Pivot보다 작은 값이면
+            // i를 오른쪽으로 이동
+            while (arr[i] < pivot) {
+                i++;
+            }
+
+            // Pivot보다 큰 값이면
+            // j를 왼쪽으로 이동
+            while (arr[j] > pivot) {
+                j--;
+            }
+
+            // 서로 위치를 바꿀 필요가 있으면
+            if (i <= j) {
+
+                // arr[i]를 임시 저장
+                int temp = arr[i];
+
+                // arr[j]를 i 위치에 넣음
+                arr[i] = arr[j];
+
+                // 원래 arr[i]였던 값을 j 위치에 넣음
+                arr[j] = temp;
+
+                // 다음 위치로 이동
+                i++;
+                j--;
+            }
+        }
+
+        // 왼쪽 부분을 다시 퀵소트
+        if (left < j) {
+            quickSort(arr, left, j);
+        }
+
+        // 오른쪽 부분을 다시 퀵소트
+        if (i < right) {
+            quickSort(arr, i, right);
+        }
+    }
+
+
+    public static void main(String[] args) {
+
+        // 정렬할 숫자를 배열에 저장
+        int[] arr = {5, 2, 8, 1, 6, 3};
+
+        // 배열 전체를 퀵소트
+        // 0번부터 마지막 번호까지
+        quickSort(arr, 0, arr.length - 1);
+
+        // 정렬된 배열 출력
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+}
